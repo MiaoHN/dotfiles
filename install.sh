@@ -20,4 +20,6 @@ CURRENT_DIR=$(
 
 mkdir -p ./.backup
 setup ~/.vimrc $CURRENT_DIR/.vimrc ./backup/.vimrc
+setup ~/.condarc $CURRENT_DIR/.condarc ./backup/.condarc
+setup ~/.zshrc $CURRENT_DIR/.zshrc ./backup/.zshrc
 setup ~/.config/nvim $CURRENT_DIR/nvim ./backup/nvim
