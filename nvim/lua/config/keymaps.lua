@@ -1,16 +1,19 @@
-function keymap(kmap)
-  for _, map in pairs(kmap) do
-    vim.api.nvim_set_keymap(map[1], map[2], map[3], map[4])
+-- Keymaps are automatically loaded on the VeryLazy event
+-- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
+-- Add any additional keymaps here
+
+local function map(mode, lhs, rhs, opts)
+  local keys = require("lazy.core.handler").handlers.keys
+  ---@cast keys LazyKeysHandler
+  -- do not create the keymap if a lazy keys handler exists
+  if not keys.active[keys.parse({ lhs, mode = mode }).id] then
+    opts = opts or {}
+    opts.silent = opts.silent ~= false
+    vim.keymap.set(mode, lhs, rhs, opts)
   end
 end
 
-keymap({
-  { 'i', 'jj', '<esc>', { noremap = true } },
-  { 'n', '<tab>', ':bnext<cr>', { noremap = true } },
-  { 'n', '<s-tab>', ':bprevious<cr>', { noremap = true } },
-  -- { 'n', '<leader>e', ':NvimTreeToggle<cr>', { noremap = true } },
-  { 'n', '<leader>h', '<c-w>h', { noremap = true } },
-  { 'n', '<leader>j', '<c-w>j', { noremap = true } },
-  { 'n', '<leader>k', '<c-w>k', { noremap = true } },
-  { 'n', '<leader>l', '<c-w>l', { noremap = true } }
-})
+map("n", "<leader>h", "<c-w>h", { desc = "Move to left window" })
+map("n", "<leader>j", "<c-w>j", { desc = "Move to bottom window" })
+map("n", "<leader>k", "<c-w>k", { desc = "Move to up window" })
+map("n", "<leader>l", "<c-w>l", { desc = "Move to right window" })
