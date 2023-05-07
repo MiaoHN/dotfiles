@@ -41,6 +41,7 @@ zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-history-substring-search
 zinit light zsh-users/zsh-autosuggestions
+zinit light agkozak/zsh-z
 
 # ---------------------------------------------
 # Setup conda
