@@ -2,7 +2,12 @@
 
 Linux 下的配置文件
 
-**一键安装**：`./install.sh`
+## 一键安装
+
+```bash
+git clone https://github.com/MiaoHN/dotfiles.git ~/.config/dotfiles
+./install.sh
+```
 
 ## 支持的配置
 
