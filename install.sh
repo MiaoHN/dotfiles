@@ -22,4 +22,5 @@ mkdir -p ./.backup
 setup ~/.vimrc $CURRENT_DIR/.vimrc ./backup/.vimrc
 setup ~/.condarc $CURRENT_DIR/.condarc ./backup/.condarc
 setup ~/.zshrc $CURRENT_DIR/.zshrc ./backup/.zshrc
+setup ~/.tmux.conf $CURRENT_DIR/.tmux.conf ./backup/.tmux.conf
 setup ~/.config/nvim $CURRENT_DIR/nvim ./backup/nvim
