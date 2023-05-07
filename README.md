@@ -8,7 +8,7 @@ Linux 下的配置文件
 
 - nvim
 - vim
-- zsh
+- zsh: (先将 anaconda3 安装在 `~/.anaconda3`)
 - conda
 - tmux
 
