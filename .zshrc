@@ -1,4 +1,7 @@
-### Added by Zinit's installer
+# ---------------------------------------------
+# Automatically install zinit
+# ---------------------------------------------
+
 if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
     print -P "%F{33} %F{220}Installing %F{33}ZDHARMA-CONTINUUM%F{220} Initiative Plugin Manager (%F{33}zdharma-continuum/zinit%F{220})…%f"
     command mkdir -p "$HOME/.local/share/zinit" && command chmod g-rwX "$HOME/.local/share/zinit"
@@ -10,12 +13,25 @@ fi
 source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
-### End of Zinit's installer chunk
+
+# ---------------------------------------------
+# Custom alias
+# ---------------------------------------------
+
 
 alias ls="ls --color"
+
+# ---------------------------------------------
+# Proxy settings
+# ---------------------------------------------
+
 export hostip=$(cat /etc/resolv.conf |grep -oP '(?<=nameserver\ ).*')
 export https_proxy="http://${hostip}:7890"
 export http_proxy="http://${hostip}:7890"
+
+# ---------------------------------------------
+# Zinit plugins
+# ---------------------------------------------
 
 zinit ice as"command" from"gh-r" \
           atclone"./starship init zsh > init.zsh; ./starship completions zsh > _starship" \
@@ -26,18 +42,23 @@ zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-history-substring-search
 zinit light zsh-users/zsh-autosuggestions
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('$HOME/.anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
+# ---------------------------------------------
+# Setup conda
+# ---------------------------------------------
+
+CONDA_PATH="$HOME/.anaconda3"
+
+if [ -d $CONDA_PATH ]; then
+  __conda_setup="$('$CONDA_PATH/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+  if [ $? -eq 0 ]; then
     eval "$__conda_setup"
-else
-    if [ -f "$HOME/.anaconda3/etc/profile.d/conda.sh" ]; then
-        . "$HOME/.anaconda3/etc/profile.d/conda.sh"
+  else
+    if [ -f "$CONDA_PATH/etc/profile.d/conda.sh" ]; then
+      . "$CONDA_PATH/etc/profile.d/conda.sh"
     else
-        export PATH="$HOME/.anaconda3/bin:$PATH"
+      export PATH="$CONDA_PATH/bin:$PATH"
     fi
+  fi
+  unset __conda_setup
 fi
-unset __conda_setup
-# <<< conda initialize <<<
 
