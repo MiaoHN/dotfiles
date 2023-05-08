@@ -4,11 +4,11 @@ Linux 下的配置文件
 
 ## 支持的配置
 
-- nvim
-- vim
-- zsh
+- nvim（使用 LazyVim）
+- vim（无插件）
+- zsh（使用 Zinit）
 - conda
-- tmux
+- tmux（无插件）
 - ranger
 
 **注意**：如果使用 conda，请在 `.zshrc` 中将 `CONDA_PATH` 设为合适的值
