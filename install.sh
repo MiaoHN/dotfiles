@@ -1,27 +1,68 @@
 #!/bin/bash
 
-# $1: src, $2: tgt, $3: bak
 setup() {
-	if [ -L $1 ]; then
-		rm $1
-		echo -e "\033[37mremove symbolic '$1'\033[0m"
-	elif [ -f $1 ] || [ -d $1 ]; then
-		mv $1 $3
-		echo -e "\033[37mmove '$1' to '$3'\033[0m"
+	src=$1
+	tgt=$2
+	bak=$3
+	if [ ! -e "$tgt" ]; then
+		echo "ERROR in setup: $tgt does not exist."
+		return
 	fi
-	ln -s $2 $1
-	echo -e "\033[32msuccessfully setup '$1'\033[0m"
+	if [ -L $src ]; then
+		rm $src
+	elif [ -f $src ] || [ -d $src ]; then
+		mv $src $bak
+	fi
+	ln -s $tgt $src
 }
 
-CURRENT_DIR=$(
-	cd "$(dirname "$0")"
-	pwd
-)
+logo() {
+	echo -e "\033[31m ____        _    __ _ _            \033[0m"
+	echo -e "\033[32m|  _ \  ___ | |_ / _(_) | ___  ___  \033[0m"
+	echo -e "\033[33m| | | |/ _ \| __| |_| | |/ _ \/ __| \033[0m"
+	echo -e "\033[34m| |_| | (_) | |_|  _| | |  __/\__ \ \033[0m"
+	echo -e "\033[35m|____/ \___/ \__|_| |_|_|\___||___/ \033[0m"
+}
 
-mkdir -p ./.backup
-setup ~/.vimrc $CURRENT_DIR/.vimrc ./.backup/.vimrc
-setup ~/.condarc $CURRENT_DIR/.condarc ./.backup/.condarc
-setup ~/.zshrc $CURRENT_DIR/.zshrc ./.backup/.zshrc
-setup ~/.tmux.conf $CURRENT_DIR/.tmux.conf ./.backup/.tmux.conf
-setup ~/.config/nvim $CURRENT_DIR/nvim ./.backup/nvim
-setup ~/.config/ranger $CURRENT_DIR/ranger ./.backup/ranger
+main() {
+	current_dir=$(
+		cd "$(dirname "$0")"
+		pwd
+	)
+
+	backup_dir="$current_dir/.backup/"
+
+	mkdir -p "$backup_dir"
+	if [ "$1" == "all" ]; then
+		files=("~/.vimrc" "~/.condarc" "~/.zshrc" "~/.tmux.conf" "~/.config/nvim" "~/.config/ranger")
+	elif [ "$1" == "vim" ]; then
+		files=("~/.vimrc")
+	elif [ "$1" == "conda" ]; then
+		files=("~/.condarc")
+	elif [ "$1" == "zsh" ]; then
+		files=("~/.zshrc")
+	elif [ "$1" == "tmux" ]; then
+		files=("~/.tmux.conf")
+	elif [ "$1" == "nvim" ]; then
+		files=("~/.config/nvim")
+	elif [ "$1" == "ranger" ]; then
+		files=("~/.config/ranger")
+	else
+		files=()
+		echo "Nothing to setup"
+	fi
+
+	for filepath in ${files[@]}; do
+		echo "Setup" $filepath
+		filepath=$(eval echo "$filepath")
+		fname=$(basename $filepath)
+		setup $filepath $current_dir/$fname $backup_dir/$fname
+	done
+
+	logo
+	echo "Author: MiaoHN"
+	echo "Github: https://github.com/MiaoHN"
+	echo "Backup dir: $backup_dir"
+}
+
+main $@
