@@ -20,6 +20,7 @@ autoload -Uz _zinit
 
 
 alias ls="ls --color"
+alias lg="lazygit"
 
 # ---------------------------------------------
 # Custom export
@@ -49,6 +50,7 @@ zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-history-substring-search
 zinit light zsh-users/zsh-autosuggestions
 zinit light agkozak/zsh-z
+zinit light hcgraf/zsh-sudo
 
 # ---------------------------------------------
 # Setup conda
