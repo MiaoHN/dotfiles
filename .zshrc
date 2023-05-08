@@ -54,7 +54,7 @@ zinit light agkozak/zsh-z
 # Setup conda
 # ---------------------------------------------
 
-CONDA_PATH="$HOME/.anaconda3"
+export CONDA_PATH="$HOME/.anaconda3"
 
 if [ -d $CONDA_PATH ]; then
   __conda_setup="$('$CONDA_PATH/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
@@ -70,3 +70,13 @@ if [ -d $CONDA_PATH ]; then
   unset __conda_setup
 fi
 
+# ---------------------------------------------
+# Setup nvm
+# ---------------------------------------------
+
+export NVM_DIR="$HOME/.nvm"
+
+if [ -d $NVM_PATH ]; then
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+fi
