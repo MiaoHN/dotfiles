@@ -48,7 +48,7 @@ zinit light hcgraf/zsh-sudo
 # Setup conda
 # ---------------------------------------------
 
-export CONDA_PATH="$HOME/.anaconda3"
+export CONDA_PATH="$HOME/miniconda3"
 
 if [ -d $CONDA_PATH ]; then
   __conda_setup="$('$CONDA_PATH/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
