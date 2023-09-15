@@ -54,5 +54,12 @@ return {
         desc = "Explorer NeoTree (root dir)",
       }
     },
-  }
+  },
+  {
+    "windwp/nvim-autopairs",
+    event = "VeryLazy",
+    config = function()
+      require("nvim-autopairs").setup({})
+    end,
+  },
 }
