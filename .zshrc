@@ -21,6 +21,7 @@ autoload -Uz _zinit
 
 alias ls="ls --color"
 alias lg="lazygit"
+alias c="clear"
 
 # ---------------------------------------------
 # Custom export
