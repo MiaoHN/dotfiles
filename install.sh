@@ -34,13 +34,13 @@ main() {
 
 	mkdir -p "$backup_dir"
 	if [ "$1" == "all" ]; then
-		files=("~/.vimrc" "~/.condarc" "~/.zshrc" "~/.tmux.conf" "~/.config/nvim" "~/.config/ranger")
+		files=("~/.vimrc" "~/.condarc" "~/.zshrc" "~/.tmux.conf" "~/.config/nvim" "~/.config/ranger" "~/.config/starship.toml")
 	elif [ "$1" == "vim" ]; then
 		files=("~/.vimrc")
 	elif [ "$1" == "conda" ]; then
 		files=("~/.condarc")
 	elif [ "$1" == "zsh" ]; then
-		files=("~/.zshrc")
+		files=("~/.zshrc" "~/.config/starship.toml")
 	elif [ "$1" == "tmux" ]; then
 		files=("~/.tmux.conf")
 	elif [ "$1" == "nvim" ]; then
