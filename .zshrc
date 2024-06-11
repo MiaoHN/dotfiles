@@ -75,3 +75,9 @@ if [ -d $NVM_PATH ]; then
   [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
   [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 fi
+
+eval "$(fzf --zsh)"
+
+# Golang setup
+export GOPATH="$HOME/go"
+export PATH="$PATH:$(go env GOBIN):$(go env GOPATH)/bin"
