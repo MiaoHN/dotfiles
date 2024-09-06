@@ -184,7 +184,7 @@ local common_servers = {
   "dockerls",
   "bashls",
   "vimls",
-  "tsserver",
+  "ts_ls",
   "yamlls",
   "terraformls",
 }
@@ -268,7 +268,7 @@ nvim_lsp.gopls.setup({
 
 vim.api.nvim_create_user_command("LspCapabilities", function()
   local curBuf = vim.api.nvim_get_current_buf()
-  local clients = vim.lsp.get_active_clients({ bufnr = curBuf })
+  local clients = vim.lsp.get_clients({ bufnr = curBuf })
 
   for _, client in pairs(clients) do
     if client.name ~= "null-ls" then

@@ -7,7 +7,7 @@ local get_root = function()
   ---@type string[]
   local roots = {}
   if path then
-    for _, client in pairs(vim.lsp.get_active_clients({ bufnr = 0 })) do
+    for _, client in pairs(vim.lsp.get_clients({ bufnr = 0 })) do
       local workspace = client.config.workspace_folders
       local paths = workspace and vim.tbl_map(function(ws)
         return vim.uri_to_fname(ws.uri)
@@ -118,6 +118,7 @@ return {
     "nvim-telescope/telescope.nvim",
     config = function()
       require('telescope').setup{
+        vim.keymap.set("n", "<c-P>", ":Telescope<CR>", { noremap = true, silent = true }),
         defaults = {
           -- Default configuration for telescope goes here:
           -- config_key = value,
@@ -173,33 +174,22 @@ return {
   -- with the active keybindings of the command you started typing.
   {
     "folke/which-key.nvim",
+    dependencies = {
+      'nvim-tree/nvim-web-devicons',
+      'echasnovski/mini.icons',
+    },
     event = "VeryLazy",
     opts = {
-      plugins = { spelling = true },
-      defaults = {
-        -- mode = { "n", "v" },
-        -- ["g"] = { name = "+goto" },
-        -- ["gz"] = { name = "+surround" },
-        -- ["]"] = { name = "+next" },
-        -- ["["] = { name = "+prev" },
-        -- ["<leader><tab>"] = { name = "+tabs" },
-        -- ["<leader>b"] = { name = "+buffer" },
-        -- ["<leader>c"] = { name = "+code" },
-        -- ["<leader>f"] = { name = "+file/find" },
-        -- ["<leader>g"] = { name = "+git" },
-        -- ["<leader>gh"] = { name = "+hunks" },
-        -- ["<leader>q"] = { name = "+quit/session" },
-        -- ["<leader>s"] = { name = "+search" },
-        -- ["<leader>u"] = { name = "+ui" },
-        -- ["<leader>w"] = { name = "+windows" },
-        -- ["<leader>x"] = { name = "+diagnostics/quickfix" },
-      },
     },
-    config = function(_, opts)
-      local wk = require("which-key")
-      wk.setup(opts)
-      wk.register(opts.defaults)
-    end,
+    keys = {
+      {
+        "<leader>?",
+        function()
+          require("which-key").show({ global = false })
+        end,
+        desc = "Buffer Local Keymaps (which-key)",
+      }
+    }
   },
 
   -- Automatically highlights other instances of the word under your cursor.
