@@ -49,7 +49,7 @@ zinit light hcgraf/zsh-sudo
 # Setup conda
 # ---------------------------------------------
 
-export CONDA_PATH="$HOME/.anaconda3"
+export CONDA_PATH="$HOME/.conda"
 
 if [ -d $CONDA_PATH ]; then
   __conda_setup="$('$CONDA_PATH/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
@@ -76,8 +76,17 @@ if [ -d $NVM_PATH ]; then
   [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 fi
 
-eval "$(fzf --zsh)"
-
 # Golang setup
 export GOPATH="$HOME/go"
 export PATH="$PATH:$(go env GOBIN):$(go env GOPATH)/bin"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# NOTE: for Jeklly
+
+# assuming that rbenv was installed to `~/.rbenv`
+export PATH=~/.rbenv/completions:"$PATH"
+export PATH=~/.rbenv/bin:"$PATH"
+
+# Added by `rbenv init` on Sat Sep 21 10:41:49 CST 2024
+eval "$(rbenv init - --no-rehash zsh)"
