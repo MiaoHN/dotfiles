@@ -30,5 +30,5 @@ vim.o.shortmess = vim.o.shortmess .. 'c'
 vim.o.completeopt = 'longest,noinsert,menuone,noselect,preview'
 vim.o.completeopt = 'menuone,noinsert,noselect,preview'
 vim.o.visualbell = true
-vim.o.colorcolumn = '80'
+vim.o.colorcolumn = '120'
 

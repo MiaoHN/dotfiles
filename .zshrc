@@ -22,6 +22,7 @@ autoload -Uz _zinit
 alias ls="ls --color"
 alias lg="lazygit"
 alias c="clear"
+alias kkk="kill -9 %1"
 
 # ---------------------------------------------
 # Custom export
@@ -77,6 +78,7 @@ if [ -d $NVM_PATH ]; then
 fi
 
 # Golang setup
+export PATH=$PATH:/usr/local/go/bin
 export GOPATH="$HOME/go"
 export PATH="$PATH:$(go env GOBIN):$(go env GOPATH)/bin"
 
