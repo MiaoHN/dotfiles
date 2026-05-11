@@ -1,5 +1,4 @@
-vim.lsp.set_log_level("off")
-local nvim_lsp = require("lspconfig")
+vim.lsp.log.set_level("off")
 
 -- get function name in body of golang function
 function _G.get_cur_go_func_name()
@@ -193,10 +192,10 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 local clangdCap = vim.lsp.protocol.make_client_capabilities()
 clangdCap.offsetEncoding = { "utf-16" }
-require("lspconfig").clangd.setup({ capabilities = clangdCap, on_attach = on_attach })
+vim.lsp.config("clangd", { capabilities = clangdCap, on_attach = on_attach })
 for _, server in pairs(common_servers) do
   -- https://www.reddit.com/r/neovim/comments/mm1h0t/lsp_diagnostics_remain_stuck_can_someone_please/
-  nvim_lsp[server].setup({
+  vim.lsp.config(server, {
     flags = {
       allow_incremental_sync = false,
       debounce_text_changes = 500,
@@ -206,7 +205,7 @@ for _, server in pairs(common_servers) do
   })
 end
 
-nvim_lsp.lua_ls.setup({
+vim.lsp.config("lua_ls", {
   capabilities = capabilities,
   on_attach = on_attach,
   settings = {
@@ -241,7 +240,7 @@ nvim_lsp.lua_ls.setup({
   },
 })
 
-nvim_lsp.gopls.setup({
+vim.lsp.config("gopls", {
   cmd = { "gopls" },
   -- for postfix snippets and analyzers
   flags = {
