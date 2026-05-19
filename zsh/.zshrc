@@ -80,7 +80,7 @@ fi
 # Golang setup
 export PATH=$PATH:/usr/local/go/bin
 export GOPATH="$HOME/go"
-export PATH="$PATH:$(go env GOBIN):$(go env GOPATH)/bin"
+# export PATH="$PATH:$(go env GOBIN):$(go env GOPATH)/bin"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
@@ -92,3 +92,4 @@ export PATH=~/.rbenv/bin:"$PATH"
 
 # Added by `rbenv init` on Sat Sep 21 10:41:49 CST 2024
 eval "$(rbenv init - --no-rehash zsh)"
+

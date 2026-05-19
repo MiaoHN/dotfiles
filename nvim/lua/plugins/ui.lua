@@ -1,3 +1,14 @@
+vim.diagnostic.config({
+  virtual_text = {
+    prefix = '●', -- 虚拟文本前缀
+    spacing = 4,
+  },
+  signs = true,     -- 在左侧侧边栏显示符号
+  underline = true, -- 下划线高亮
+  update_in_insert = false, -- 在插入模式下不更新诊断
+  severity_sort = true, -- 按严重程度排序
+})
+
 return {
   -- ui components
   { "MunifTanjim/nui.nvim" , lazy = true },

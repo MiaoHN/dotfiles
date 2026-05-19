@@ -72,7 +72,7 @@ return {
           return true
         end, opts.ensure_installed)
       end
-      require("nvim-treesitter.configs").setup(opts)
+      require("nvim-treesitter.config").setup(opts)
 
       if load_textobjects then
         -- PERF: no need to load the plugin, if we only need its queries for mini.ai
